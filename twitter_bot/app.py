@@ -10,11 +10,9 @@ def create_app():
 
         TwitterThread().start()
 
-        return web_app
-
     except Exception as e:
         logging.exception(e)
 
 
 if __name__ == '__main__':
-    web_app = create_app()
+    create_app()

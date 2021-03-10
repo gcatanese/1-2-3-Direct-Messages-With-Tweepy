@@ -12,7 +12,7 @@ class TwitterThread():
         self.interval = 60
 
         thread = threading.Thread(target=self.run, args=())
-        thread.daemon = True
+        thread.daemon = False
         thread.start()
 
     def run(self):
@@ -21,6 +21,7 @@ class TwitterThread():
             try:
 
                 messages = get_direct_messages()
+                logging.info(f"num messages->{len(messages)}")
 
                 for message in reversed(messages):
 
@@ -29,6 +30,7 @@ class TwitterThread():
                         sender_id = get_sender_id(message)
                         logging.debug(f'DM from {sender_id}')
 
+                        # delete DM after reading
                         delete_direct_message(message)
 
                         MessageWorker(message)

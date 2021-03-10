@@ -1,5 +1,4 @@
 import tweepy
-import logging
 
 from config import *
 
@@ -13,41 +12,8 @@ def get_api():
     return api
 
 
-def extract_url(message):
-    message_data = message.message_create["message_data"]
-    list_urls = message_data["entities"]["urls"]
-
-    if len(list_urls) > 0:
-        url = list_urls[0]['expanded_url']
-    else:
-        url = None
-
-    return url
-
-
 def get_sender_id(message):
     return message.message_create["sender_id"]
-
-
-def find_my_followers():
-    followers = get_api().followers()
-
-    logging.info(f'Followers {followers}')
-
-    return followers
-
-
-def is_my_follower(user_id):
-    ret = False
-
-    followers = find_my_followers()
-
-    for user in followers:
-        if user_id == user.id_str:
-            ret = True
-            break
-
-    return ret
 
 
 def delete_direct_message(direct_message):
@@ -56,7 +22,11 @@ def delete_direct_message(direct_message):
 
 
 def send_direct_message(sender_id, text):
-    get_api().send_direct_message(sender_id, text)
+    get_api().send_direct_message(recipient_id=sender_id, text=text)
+
+
+def send_direct_message_with_media(sender_id, text, attachment_media_id):
+    get_api().send_direct_message(recipient_id=sender_id, text=text, attachment_type='media', attachment_media_id=attachment_media_id)
 
 
 def get_direct_messages():
@@ -64,8 +34,14 @@ def get_direct_messages():
 
     return messages
 
+
 def get_tweet_by_id(id):
     return get_api().get_status(id=id)
+
+
+def upload_media(media):
+    return get_api().media_upload(filename=media)
+
 
 
 

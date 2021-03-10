@@ -1,7 +1,7 @@
 import threading
 import logging
 
-from twitter.twitter_util import extract_url, send_direct_message, get_sender_id, delete_direct_message
+from twitter.twitter_util import send_direct_message, send_direct_message_with_media, get_sender_id, delete_direct_message, upload_media
 
 
 class MessageWorker():
@@ -16,15 +16,19 @@ class MessageWorker():
     def run(self):
         logging.info(f'run MessageWorker')
 
-        url = extract_url(self.message)
         sender_id = get_sender_id(self.message)
 
         try:
 
-            reply = send_direct_message(sender_id, "Hello from Beppe")
-        except Exception:
-            logging.info(f'Error')
+            # media = upload_media(media='/files/thankyou.png')
+            # reply = send_direct_message_with_media(sender_id, "Hello from Beppe", attachment_media_id = media.media_id)
 
+            reply = send_direct_message(sender_id, "Hello from Beppe")
+
+        except Exception as e:
+            logging.info(f'Error {e}')
+
+        # delete own reply
         delete_direct_message(reply)
 
 

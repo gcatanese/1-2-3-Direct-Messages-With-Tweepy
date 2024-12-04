@@ -1,7 +1,7 @@
 # 1-2-3-Direct-Messages-With-Tweepy
 Reading, replying and deleting Twitter Direct Messages with Tweepy
 
-This is the sample code of the [Twitter Direct Messages like a Pro (with Tweepy)](https://beppecatanese.medium.com/twitter-direct-messages-like-a-pro-with-tweepy-48bc1cdade04) 
+This is the sample code of the [Twitter Direct Messages like a Pro (with Tweepy)](https://beppecatanese.hashnode.dev/twitter-direct-messages-like-a-pro-with-tweepy)
 article.
 
 ## Setup
